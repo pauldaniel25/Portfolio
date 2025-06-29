@@ -230,7 +230,6 @@ html, body {
 .black-section {
     background: linear-gradient(225deg, #373838 0%, #050505 100%);
     color: #333;
-    flex-direction: row;
     padding: 0;
     position: relative;
     overflow: hidden;
@@ -242,6 +241,18 @@ html, body {
     width: 100%;
     height: 90%;
     padding: 0 2rem;
+}
+.section-title {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    text-align: right; /* Align text to the right */
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+    position: absolute; /* Position absolutely */
+    top: 2rem; /* Distance from top */
+    left: 2rem; /* Distance from right */
+    z-index: 2; /* Ensure it's above other elements */
+    margin: 0; /* Remove default margin */
 }
 
 .card {
@@ -257,7 +268,48 @@ html, body {
      opacity: 0;
      transition: all 0.5s ease-out;
      border: none;
+     cursor: pointer;
     
+}
+
+.card:hover {
+   transition: transform 0.4s ease, backdrop-filter 0.4s ease, background-color 0.4s ease;
+    backdrop-filter: blur(30px);
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.3);
+    transition-delay: 0s !important; /* Remove delay on hover */
+}
+.card:hover .work_title {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+#Furnitures {
+    background-image: url('Images/projects/furniture/LOGO.png');
+    background-size: 172%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+ opacity: 80%;
+}
+
+#TidyUp {
+    background-image: url('Images/projects/Tidy-Up/logofinal.png');
+    background-size: 110%;
+    background-position: center 42%; /* Move image up */
+    background-repeat: no-repeat;
+    background-color: transparent;
+ opacity: 80%;
+}
+
+#Texify {
+    background-image: url('Images/projects/Texify/system.png');
+    background-size: 90%;
+    background-position: center 45%; /* Move image up */
+    background-repeat: no-repeat;
+    background-color: transparent;
+    opacity: 80%;
 }
 
 .card::before,
@@ -288,12 +340,13 @@ html, body {
 }
 
 .work_title{
+    margin-top: 25%;
     font-family: 'WDXL Lubrifont JP N', sans-serif;
     writing-mode: vertical-rl;
     text-orientation: upright;
-    font-size: 1.5rem;
+    font-size: 2rem !important;
     font-weight: bold;
-    color: white;
+    color: #b1b1b3;
 }
 
 
@@ -303,15 +356,15 @@ html, body {
 }
 
 .card:nth-child(1).animate {
-    transition-delay: 0.2s;
+    transition-delay: 0.5s;
 }
 
 .card:nth-child(2).animate {
-    transition-delay: 0.2s;
+    transition-delay: 0.5s;
 }
 
 .card:nth-child(3).animate {
-    transition-delay: 0.2s;
+    transition-delay: 0.5s;
 }
 /* gray */
 .gray-section {
