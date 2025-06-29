@@ -228,37 +228,72 @@ html, body {
 }
 /* black */
 .black-section {
-    background-color: black;
-    color: white;
+    background: linear-gradient(225deg, #373838 0%, #050505 100%);
+    color: #333;
+    flex-direction: row;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
 }
 .cards-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
-    gap: 2rem;
+    height: 90%;
     padding: 0 2rem;
 }
 
 .card {
-    flex: 1;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    padding: 3rem 2rem;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    transform: translateY(50px);
-    opacity: 0;
-    transition: all 0.8s ease-out;
+     display: flex;
+     justify-content: center; 
+     align-items: flex-start;   
+     position: relative;
+     height: 100%;
+     width: 20%;
+     background-color: transparent;
+     padding: 2rem 1rem;
+     backdrop-filter: blur(10px);
+     opacity: 0;
+     transition: all 0.5s ease-out;
+     border: none;
+    
 }
 
-.card p {
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5), transparent);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.card::before {
+    left: 0;
+}
+
+.card::after {
+    right: 0;
+}
+.card:nth-child(odd) {
+    transform: translateY(-1000px); /* Cards 1 and 3 start from above */
+}
+
+.card:nth-child(even) {
+    transform: translateY(1000px); /* Card 2 starts from below */
+}
+
+.work_title{
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
-    margin: 0;
 }
 
 
@@ -272,11 +307,11 @@ html, body {
 }
 
 .card:nth-child(2).animate {
-    transition-delay: 0.4s;
+    transition-delay: 0.2s;
 }
 
 .card:nth-child(3).animate {
-    transition-delay: 0.6s;
+    transition-delay: 0.2s;
 }
 /* gray */
 .gray-section {

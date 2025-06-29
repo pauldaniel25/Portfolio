@@ -136,33 +136,24 @@ document.addEventListener('DOMContentLoaded', function() {
         section.style.transition = 'opacity 0.6s ease-in-out';
     });
 
-    // Update section visibility (only opacity, no scaling)
-// Update section visibility (only opacity, no scaling)
-    function updateSectionVisibility() {
-        sections.forEach((section, index) => {
-            if (index === currentSection) {
-                section.style.opacity = '1';
-                
-                // Animate cards in black section
-                if (section.classList.contains('black-section')) {
-                    const cards = section.querySelectorAll('.card');
-                    cards.forEach(card => {
-                        card.classList.add('animate');
-                    });
-                }
-            } else {
-                section.style.opacity = '0.7';
-                
-                // Reset card animations when leaving black section
-                if (section.classList.contains('black-section')) {
-                    const cards = section.querySelectorAll('.card');
-                    cards.forEach(card => {
-                        card.classList.remove('animate');
-                    });
-                }
+let blackSectionAnimated = false;
+
+  function updateSectionVisibility() {
+    sections.forEach((section, index) => {
+        if (index === currentSection) {
+            // section.style.opacity = '1';
+            
+            // Animate cards in black section
+            if (section.classList.contains('black-section') && !blackSectionAnimated) {
+                const cards = section.querySelectorAll('.card');
+                cards.forEach(card => {
+                    card.classList.add('animate');
+                });
+                 blackSectionAnimated = true;
             }
-        });
-    }
+        } 
+    });
+}
 
     // Initial setup
     updateSectionVisibility();
