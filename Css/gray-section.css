@@ -1,0 +1,140 @@
+.gray-section {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    color: #ffffff;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.gray-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="70" cy="70" r="1" fill="%23000000" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+.about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.about-text {
+    flex: 1;
+    transform: translateX(-50px);
+    opacity: 0;
+    animation: slideInLeft 1s ease-out 0.3s forwards;
+}
+
+.about-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ffffff 0%, #b1b1b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+}
+
+.about-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #b1b1b3;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.about-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d1d1d1;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+}
+
+.about-image {
+    flex: 0 0 350px;
+    height: 400px;
+    position: relative;
+    transform: translateX(50px);
+    opacity: 0;
+    animation: slideInRight 1s ease-out 0.6s forwards;
+}
+
+.about-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-profile-image:hover {
+    transform: scale(1.02);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.about-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2), transparent);
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .about-image {
+        flex: none;
+        width: 300px;
+        height: 350px;
+        margin: 0 auto;
+    }
+    
+    .about-title {
+        font-size: 2.5rem;
+    }
+}

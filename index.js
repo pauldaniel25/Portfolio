@@ -158,3 +158,116 @@ let blackSectionAnimated = false;
     // Initial setup
     updateSectionVisibility();
 });
+
+// Project detail functionality - Arknights style
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.card');
+    const blackSection = document.getElementById('black-section');
+    const cardsContainer = document.getElementById('cards-container');
+    const projectDetailsContainer = document.getElementById('project-details-container');
+    const projectDetailsInline = document.querySelectorAll('.project-detail-inline');
+    const closeBtn = document.getElementById('close-project-btn');
+
+    // Card click handlers
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            const cardId = this.id.toLowerCase();
+            const detailId = cardId + '-detail-inline';
+            
+            // Add detail view classes
+            blackSection.classList.add('detail-view');
+            cardsContainer.classList.add('detail-active');
+            projectDetailsContainer.classList.add('active');
+            
+            // Hide all project details first
+            projectDetailsInline.forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Show selected project detail
+            const projectDetail = document.getElementById(detailId);
+            if (projectDetail) {
+                setTimeout(() => {
+                    projectDetail.classList.add('active');
+                }, 300);
+            }
+        });
+    });
+
+    // Close button handler
+closeBtn.addEventListener('click', function() {
+    // Remove detail view classes in the right order
+    projectDetailsContainer.classList.remove('active');
+    
+    // Let the project details fade out first, then bring cards back
+    setTimeout(() => {
+        blackSection.classList.remove('detail-view');
+        cardsContainer.classList.remove('detail-active');
+        
+        // Hide all project details
+        projectDetailsInline.forEach(detail => {
+            detail.classList.remove('active');
+        });
+    }, 300);
+});
+});
+
+
+// Image slider functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const sliders = document.querySelectorAll('.image-slider');
+    
+    sliders.forEach(slider => {
+        const track = slider.querySelector('.slider-track');
+        const images = slider.querySelectorAll('.project-image-inline');
+        const prevBtn = slider.querySelector('.slider-arrow.prev');
+        const nextBtn = slider.querySelector('.slider-arrow.next');
+        const dots = slider.parentElement.querySelectorAll('.slider-dot');
+        
+        let currentSlide = 0;
+        const totalSlides = images.length;
+        
+        // Hide arrows and dots if only one image
+        if (totalSlides <= 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            slider.parentElement.querySelector('.slider-dots').style.display = 'none';
+            return;
+        }
+        
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+        
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+        
+        // Arrow click handlers
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Dot click handlers
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+        
+        // Auto-play (optional)
+         setInterval(nextSlide, 5000);
+    });
+});
+

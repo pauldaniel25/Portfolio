@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/white-section.css">
+    <link rel="stylesheet" href="css/black-section.css">
+    <link rel="stylesheet" href="css/gray-section.css">
+    <link rel="stylesheet" href="css/skills-section.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+JP+N&display=swap" rel="stylesheet">
@@ -34,27 +38,165 @@
             </div>
         </section>
         
-           <section class="section black-section">
-            <h1 class="section-title">Works</h1>
-            <div class="cards-container">
-                <div class="card" id="Furnitures">
-                    <p class="work_title">Furnitures</p>
+<section class="section black-section" id="black-section">
+    <h1 class="section-title">Works</h1>
+    <div class="cards-container" id="cards-container">
+        <div class="card" id="Furnitures">
+            <p class="work_title">Furnitures</p>
+        </div>
+        <div class="card" id="TidyUp">
+            <p class="work_title">Tidy Up</p>
+        </div>
+        <div class="card" id="Texify">
+            <p class="work_title">Texify</p>
+        </div>
+    </div>
+    
+    <!-- Project details container -->
+    <div class="project-details-container" id="project-details-container">
+        <button class="close-project-btn" id="close-project-btn">&times;</button>
+        
+<div class="project-detail-inline" id="furnitures-detail-inline">
+    <div class="project-content-inline">
+        <div class="project-images-inline">
+            <div class="image-slider" data-slider="furnitures">
+                <div class="slider-track">
+                    <img src="Images/projects/furniture/Screenshot 2025-06-29 200110.png" alt="Furniture Project" class="project-image-inline">
+                    <img src="Images/projects/furniture/Screenshot 2025-06-29 200032.png" alt="Furniture Project" class="project-image-inline">
                 </div>
+                <button class="slider-arrow prev" data-direction="prev">‹</button>
+                <button class="slider-arrow next" data-direction="next">›</button>
+            </div>
+            <div class="slider-dots" data-dots="furnitures">
+                <span class="slider-dot active" data-slide="0"></span>
+                <span class="slider-dot" data-slide="1"></span>
+            </div>
+        </div>
+        <div class="project-info-inline">
+            <h2 class="project-title-inline">Furniture Management System</h2>
+            <p class="project-description-inline">
+                A comprehensive furniture management system built with modern web technologies. 
+                This system allows users to browse, manage, and track furniture inventory.
+            </p>
+            <p class="project-description-inline">
+                Features include real-time inventory tracking, user authentication, 
+                advanced search and filtering, and responsive design for all devices.
+            </p>
+        </div>
+    </div>
+</div>
 
-                 <div class="card" id="TidyUp">
-                    <p class="work_title">Tidy Up</p>
-                 </div>
+<div class="project-detail-inline" id="tidyup-detail-inline">
+    <div class="project-content-inline">
+        <div class="project-images-inline">
+            <div class="image-slider" data-slider="tidyup">
+                <div class="slider-track">
+                    <img src="Images/projects/Tidy-Up/logofinal.png" alt="Tidy Up Project" class="project-image-inline">
+                </div>
+                <button class="slider-arrow prev" data-direction="prev">‹</button>
+                <button class="slider-arrow next" data-direction="next">›</button>
+            </div>
+            <div class="slider-dots" data-dots="tidyup">
+                <span class="slider-dot active" data-slide="0"></span>
+            </div>
+        </div>
+        <div class="project-info-inline">
+            <h2 class="project-title-inline">Tidy Up Task Manager</h2>
+            <p class="project-description-inline">
+                A modern task management application designed to help users organize 
+                their daily activities and increase productivity.
+            </p>
+        </div>
+    </div>
+</div>
 
-                 <div class="card" id="Texify">
-                    <p class="work_title">Texify</p>
+<div class="project-detail-inline" id="texify-detail-inline">
+    <div class="project-content-inline">
+        <div class="project-images-inline">
+            <div class="image-slider" data-slider="texify">
+                <div class="slider-track">
+                    <img src="Images/projects/Texify/system.png" alt="Texify Project" class="project-image-inline">
+                </div>
+                <button class="slider-arrow prev" data-direction="prev">‹</button>
+                <button class="slider-arrow next" data-direction="next">›</button>
+            </div>
+            <div class="slider-dots" data-dots="texify">
+                <span class="slider-dot active" data-slide="0"></span>
+            </div>
+        </div>
+        <div class="project-info-inline">
+            <h2 class="project-title-inline">Texify Document Processor</h2>
+            <p class="project-description-inline">
+                An advanced document processing system that converts and manages 
+                various text formats with high precision and speed.
+            </p>
+        </div>
+    </div>
+</div>
+
+        <!-- Other project details... -->
+    </div>
+</section>
+        
+        <!-- about  -->
+     <section class="section gray-section">
+    <div class="about-container">
+        <div class="about-content">
+            <div class="about-text">
+                <h1 class="about-title">About Me</h1>
+                <h2 class="about-subtitle">Backend Developer & Database Specialist</h2>
+                <p class="about-description">
+                    I'm a 4th-year Computer Science student at Western Mindanao State University, passionate about building efficient and scalable systems. With a strong foundation in backend development and database management, I turn complex problems into clean, functional solutions.
+                </p>
+                <p class="about-description">
+                    My journey in computer science has led me to specialize in server-side technologies, database optimization, and system architecture. I enjoy the challenge of creating robust backends that power seamless user experiences.
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="Images/profile/download.jpg" alt="Paul Daniel Ojales" class="about-profile-image">
+                <div class="about-image-overlay"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Skills & Technologies Section -->
+<section class="section skills-section">
+    <div class="skills-container">
+        <h1 class="skills-main-title">Skills & Technologies</h1>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-category-icon">
+                    <span class="category-icon">💻</span>
+                </div>
+                <h3 class="skill-category-title">Programming</h3>
+                <div class="skills-list">
+                    <span class="skill-item">PHP</span>
+                    <span class="skill-item">Java</span>
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">C++</span>
+                    <span class="skill-item">Laravel</span>
+                    <span class="skill-item">Bootstrap</span>
+                    <span class="skill-item">Tailwind</span>
                 </div>
             </div>
-        </section>
-        
-        <section class="section gray-section">
-            <h1>Gray Section</h1>
-            <p>This is the gray section content</p>
-        </section>
+            
+            <div class="skill-category">
+                <div class="skill-category-icon">
+                    <span class="category-icon">🧠</span>
+                </div>
+                <h3 class="skill-category-title">Soft Skills</h3>
+                <div class="skills-list">
+                    <span class="skill-item">Critical Thinker</span>
+                    <span class="skill-item">Logical Thinker</span>
+                    <span class="skill-item">Adaptable</span>
+                    <span class="skill-item">Organized</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     </main>
     <script src="index.js"></script>
 </body>
