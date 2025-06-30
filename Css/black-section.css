@@ -243,7 +243,8 @@
 .close-project-btn {
     position: absolute;
     top: 2rem;
-    right: 2rem;
+    left: 50%; /* Change from right: 2rem to left: 50% */
+    transform: translateX(-50%) scale(0); /* Add translateX(-50%) to center horizontally */
     background: rgba(255, 255, 255, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
@@ -258,7 +259,6 @@
     transition: all 0.3s ease;
     z-index: 1000;
     opacity: 0;
-    transform: scale(0);
     animation: scaleIn 0.5s ease forwards 1.3s;
 }
 
@@ -272,6 +272,7 @@
 .section-title {
     font-size: 3rem;
     color: #ffffff;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
     margin-bottom: 2rem;
     text-align: left;
     position: absolute;
@@ -279,6 +280,59 @@
     left: 2rem;
     z-index: 2;
     margin: 0;
+    animation: brokenLED 3s infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Broken LED blinking animation - complex pattern */
+@keyframes brokenLED {
+    /* Two fast blinks */
+    0% { 
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    2% { 
+        opacity: 0.3;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+    4% { 
+        opacity: 1;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+    6% { 
+        opacity: 0.2;
+        text-shadow: 0 0 3px rgba(255, 255, 255, 0.1);
+    }
+    8% { 
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Stay on for a moment */
+    25% { 
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* One long blink - goes off for 1 second */
+    27% { 
+        opacity: 0;
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+    }
+    44% { 
+        opacity: 0;
+        text-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+    }
+    46% { 
+        opacity: 1;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Stay on until end */
+    100% { 
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
 }
 
 /* Card styles */

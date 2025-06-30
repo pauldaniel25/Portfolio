@@ -17,6 +17,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // ADD SCROLL ARROW FUNCTIONALITY HERE (INSIDE THE FIRST EVENT LISTENER)
+    const scrollArrow = document.getElementById('scroll-arrow');
+    
+    if (scrollArrow) {
+        scrollArrow.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Arrow clicked!'); // Debug log
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                scrollToSection(currentSection);
+            }
+        });
+    }
+
     // Enhanced wheel event for smoother control
     scrollContainer.addEventListener('wheel', function(e) {
         e.preventDefault();
@@ -136,24 +150,24 @@ document.addEventListener('DOMContentLoaded', function() {
         section.style.transition = 'opacity 0.6s ease-in-out';
     });
 
-let blackSectionAnimated = false;
+    let blackSectionAnimated = false;
 
-  function updateSectionVisibility() {
-    sections.forEach((section, index) => {
-        if (index === currentSection) {
-            // section.style.opacity = '1';
-            
-            // Animate cards in black section
-            if (section.classList.contains('black-section') && !blackSectionAnimated) {
-                const cards = section.querySelectorAll('.card');
-                cards.forEach(card => {
-                    card.classList.add('animate');
-                });
-                 blackSectionAnimated = true;
-            }
-        } 
-    });
-}
+    function updateSectionVisibility() {
+        sections.forEach((section, index) => {
+            if (index === currentSection) {
+                // section.style.opacity = '1';
+                
+                // Animate cards in black section
+                if (section.classList.contains('black-section') && !blackSectionAnimated) {
+                    const cards = section.querySelectorAll('.card');
+                    cards.forEach(card => {
+                        card.classList.add('animate');
+                    });
+                    blackSectionAnimated = true;
+                }
+            } 
+        });
+    }
 
     // Initial setup
     updateSectionVisibility();
@@ -195,23 +209,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close button handler
-closeBtn.addEventListener('click', function() {
-    // Remove detail view classes in the right order
-    projectDetailsContainer.classList.remove('active');
-    
-    // Let the project details fade out first, then bring cards back
-    setTimeout(() => {
-        blackSection.classList.remove('detail-view');
-        cardsContainer.classList.remove('detail-active');
+    closeBtn.addEventListener('click', function() {
+        // Remove detail view classes in the right order
+        projectDetailsContainer.classList.remove('active');
         
-        // Hide all project details
-        projectDetailsInline.forEach(detail => {
-            detail.classList.remove('active');
-        });
-    }, 300);
+        // Let the project details fade out first, then bring cards back
+        setTimeout(() => {
+            blackSection.classList.remove('detail-view');
+            cardsContainer.classList.remove('detail-active');
+            
+            // Hide all project details
+            projectDetailsInline.forEach(detail => {
+                detail.classList.remove('active');
+            });
+        }, 300);
+    });
 });
-});
-
 
 // Image slider functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -267,7 +280,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Auto-play (optional)
-         setInterval(nextSlide, 5000);
+        setInterval(nextSlide, 5000);
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navSidebar = document.getElementById('nav-sidebar');
+    
+    if (navToggle && navSidebar) {
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('active');
+            navSidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navSidebar.contains(e.target) && !navToggle.contains(e.target)) {
+                navToggle.classList.remove('active');
+                navSidebar.classList.remove('active');
+            }
+        });
+        
+        // Close sidebar on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                navToggle.classList.remove('active');
+                navSidebar.classList.remove('active');
+            }
+        });
+    }
 });
 

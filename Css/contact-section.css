@@ -1,0 +1,323 @@
+.contact-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #ffffff;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+    letter-spacing: 2px;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideInUp 1s ease-out forwards;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+}
+
+/* Contact Info Container */
+.contact-info {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideInUp 1s ease-out 0.2s forwards;
+}
+
+.contact-info-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.contact-info-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+    letter-spacing: 1px;
+}
+
+.contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #4a4a4a 0%, #2a2a2a 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.contact-icon .icon {
+    font-size: 1.3rem;
+}
+
+.contact-details {
+    text-align: left;
+}
+
+.contact-label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #e0e0e0;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+}
+
+.contact-value {
+    font-size: 0.95rem;
+    color: #b0b0b0;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Social Links Container */
+.social-links {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideInUp 1s ease-out 0.4s forwards;
+}
+
+.social-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 2rem 0;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.social-link:hover::before {
+    left: 100%;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.social-link.facebook:hover {
+    border-color: #1877f2;
+    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.2);
+}
+
+.social-link.linkedin:hover {
+    border-color: #0077b5;
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.2);
+}
+
+.social-link.github:hover {
+    border-color: #666;
+    box-shadow: 0 8px 25px rgba(102, 102, 102, 0.2);
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.social-text {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+}
+
+/* Animations */
+@keyframes slideInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 3rem 1rem;
+    }
+    
+    .contact-main-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-info,
+    .social-links {
+        padding: 2rem;
+    }
+    
+    .contact-info-title,
+    .social-title {
+        font-size: 1.5rem;
+    }
+    
+    .contact-item {
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+    
+    .contact-icon {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .contact-icon .icon {
+        font-size: 1.1rem;
+    }
+    
+    .social-link {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-main-title {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+    
+    .contact-info,
+    .social-links {
+        padding: 1.5rem;
+    }
+    
+    .contact-info-title,
+    .social-title {
+        font-size: 1.3rem;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+    
+    .contact-details {
+        text-align: center;
+    }
+    
+    .social-link {
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+    
+    .social-text {
+        font-size: 0.9rem;
+    }
+}
