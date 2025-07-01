@@ -1,0 +1,21 @@
+/* Animations */
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    to {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+}

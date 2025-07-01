@@ -1,0 +1,120 @@
+/* Project detail within section */
+.project-details-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background: linear-gradient(225deg, #373838 0%, #050505 100%);
+    backdrop-filter: blur(30px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-details-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.project-detail-inline {
+    display: none;
+    height: 100%;
+    width: 100%;
+    padding: 4rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease 0.3s;
+}
+
+.project-detail-inline.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    align-items: center;
+    justify-content: center;
+}
+
+.project-content-inline {
+    display: flex;
+    gap: 4rem;
+    height: 80%;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-info-inline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+    justify-content: center;
+    padding-left: 2rem;
+}
+
+.project-title-inline {
+    font-size: 3.5rem;
+    font-family: 'WDXL Lubrifont JP N', sans-serif;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #b1b1b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateX(-50px);
+    opacity: 0;
+    animation: slideInLeft 0.8s ease forwards 0.4s;
+    line-height: 1.2;
+}
+
+.project-description-inline {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #b1b1b3;
+    transform: translateX(-50px);
+    opacity: 0;
+    animation: slideInLeft 0.8s ease forwards 0.6s;
+    margin-bottom: 1rem;
+}
+
+.project-description-inline:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+/* Close button */
+.close-project-btn {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    animation: scaleIn 0.5s ease forwards 1.3s;
+}
+
+.close-project-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(-50%) scale(1.1);
+}
