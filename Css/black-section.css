@@ -373,8 +373,8 @@
 
 /* Card background images */
 #Furnitures {
-    background-image: url('../Images/projects/furniture/LOGO.png');
-    background-size: 172%;
+    background-image: url('../Images/projects/furniture/LOGO2.png');
+    background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -382,18 +382,18 @@
 }
 
 #TidyUp {
-    background-image: url('../Images/projects/Tidy-Up/logofinal.png');
-    background-size: 110%;
-    background-position: center 42%;
+    background-image: url('../Images/projects/Tidy-Up/logofinal2.png');
+    background-size: 80%;
+    background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     opacity: 0.8;
 }
 
 #Texify {
-    background-image: url('../Images/projects/Texify/system.png');
-    background-size: 90%;
-    background-position: center 45%;
+    background-image: url('../Images/projects/Texify/system2.png');
+    background-size: 80%;
+    background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     opacity: 0.8;

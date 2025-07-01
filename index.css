@@ -7,12 +7,27 @@
 html, body {
     height: 100%;
     font-family: Arial, sans-serif;
+    /* Hide scrollbars globally */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
 }
 
 .scroll-container {
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+    /* Hide scrollbar for the main container */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none;
 }
 
 .section {
@@ -25,6 +40,8 @@ html, body {
     padding: 2rem;
     text-align: center;
 }
+
+/* Navigation Toggle Button */
 .nav-toggle {
     position: fixed;
     top: 2rem;
@@ -90,6 +107,12 @@ html, body {
     visibility: visible;
 }
 
+.nav-sidebar.dragging {
+    transition: none; /* Disable transitions while dragging */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); /* Enhanced shadow while dragging */
+}
+
+/* Navigation Items */
 .nav-item {
     width: 45px;
     height: 45px;
@@ -100,7 +123,7 @@ html, body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.2s ease;
     position: relative;
     overflow: hidden;
 }
@@ -136,6 +159,7 @@ html, body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
+/* Roman Numerals */
 .roman-numeral {
     font-family: 'WDXL Lubrifont JP N', serif;
     font-size: 0.9rem;
@@ -153,10 +177,22 @@ html, body {
 
 .nav-item.active .roman-numeral {
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
 }
 
-/* Responsive adjustments */
+/* Section Animation Classes */
+.skill-item {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.contact-item,
+.social-link {
+    transition: all 0.3s ease;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .nav-toggle {
         top: 1.5rem;
@@ -207,35 +243,4 @@ html, body {
     .roman-numeral {
         font-size: 0.7rem;
     }
-}
-
-/* remove default side scroll bar */
-
-.scroll-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scroll-container {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-/* Alternative: If you want to hide all scrollbars globally */
-html::-webkit-scrollbar {
-    display: none;
-}
-
-html {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-body::-webkit-scrollbar {
-    display: none;
-}
-
-body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }

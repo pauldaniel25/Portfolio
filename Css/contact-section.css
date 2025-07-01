@@ -196,20 +196,54 @@
 .social-link.facebook:hover {
     border-color: #1877f2;
     box-shadow: 0 8px 25px rgba(24, 119, 242, 0.2);
+    background: rgba(24, 119, 242, 0.1);
+}
+
+.social-link.facebook .social-icon {
+    background: rgba(102, 102, 102, 0.2);
+}
+
+.social-link.facebook:hover .social-icon {
+    background: rgba(24, 119, 242, 0.3);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.4);
 }
 
 .social-link.linkedin:hover {
     border-color: #0077b5;
     box-shadow: 0 8px 25px rgba(0, 119, 181, 0.2);
+    background: rgba(0, 119, 181, 0.1);
+}
+
+.social-link.linkedin .social-icon {
+    background: rgba(102, 102, 102, 0.2);
+}
+
+.social-link.linkedin:hover .social-icon {
+    background: rgba(0, 119, 181, 0.3);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 119, 181, 0.4);
 }
 
 .social-link.github:hover {
-    border-color: #666;
+    border-color: #333;
     box-shadow: 0 8px 25px rgba(102, 102, 102, 0.2);
+    background: rgba(51, 51, 51, 0.1);
+}
+
+.social-link.github .social-icon {
+    background: rgba(102, 102, 102, 0.2);
+    color: #666;
+}
+
+.social-link.github:hover .social-icon {
+    background: rgba(102, 102, 102, 0.3);
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(102, 102, 102, 0.4);
 }
 
 .social-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     width: 40px;
     height: 40px;
     display: flex;

@@ -62,15 +62,6 @@
     overflow: hidden;
     transform: translateY(50px);
     opacity: 0;
-    animation: slideInUp 1s ease-out forwards;
-}
-
-.skill-category:nth-child(1) {
-    animation-delay: 0.6s;
-}
-
-.skill-category:nth-child(2) {
-    animation-delay: 0.8s;
 }
 
 .skill-category::before {
@@ -142,6 +133,8 @@
     cursor: default;
     position: relative;
     overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
 }
 
 .skill-item::before {
