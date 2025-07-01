@@ -4,6 +4,10 @@
     padding: 4rem 2rem;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gray-section::before {
@@ -48,6 +52,7 @@
     background-clip: text;
     line-height: 1.2;
     font-family: 'WDXL Lubrifont JP N', sans-serif;
+    word-break: break-word;
 }
 
 .about-subtitle {
@@ -56,6 +61,7 @@
     color: #b1b1b3;
     margin-bottom: 1.5rem;
     letter-spacing: 1px;
+    line-height: 1.3;
 }
 
 .about-description {
@@ -119,22 +125,315 @@
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Only Mobile and Tablet Adjustments */
+
+/* Tablets (1024px and below) */
+@media (max-width: 1024px) {
+    .gray-section {
+        padding: 3rem 1.5rem;
+    }
+    
     .about-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
+        gap: 3rem;
+    }
+    
+    .about-title {
+        font-size: 3rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .about-description {
+        font-size: 1rem;
     }
     
     .about-image {
+        flex: 0 0 320px;
+        height: 370px;
+    }
+}
+
+/* Standard Tablets (768px and below) */
+@media (max-width: 768px) {
+    .gray-section {
+        padding: 2.5rem 1rem;
+    }
+    
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .about-text {
+        order: 2;
+        max-width: 100%;
+    }
+    
+    .about-image {
+        order: 1;
         flex: none;
-        width: 300px;
-        height: 350px;
+        width: 280px;
+        height: 320px;
         margin: 0 auto;
     }
     
     .about-title {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .about-description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        max-width: 90%;
+        margin: 0 auto 1.5rem auto;
+    }
+}
+
+/* Small Tablets and Large Mobile (600px and below) */
+@media (max-width: 600px) {
+    .gray-section {
+        padding: 2rem 0.8rem;
+    }
+    
+    .about-content {
+        gap: 2rem;
+    }
+    
+    .about-image {
+        width: 250px;
+        height: 290px;
+    }
+    
+    .about-title {
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .about-description {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        max-width: 95%;
+    }
+}
+
+/* Mobile Portrait (480px and below) */
+@media (max-width: 480px) {
+    .gray-section {
+        padding: 1.8rem 0.7rem;
+    }
+    
+    .about-container {
+        padding: 0 0.3rem;
+    }
+    
+    .about-content {
+        gap: 1.8rem;
+    }
+    
+    .about-image {
+        width: 220px;
+        height: 260px;
+    }
+    
+    .about-title {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.1;
+    }
+    
+    .about-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        letter-spacing: 0.3px;
+    }
+    
+    .about-description {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        max-width: 100%;
+    }
+    
+    .about-profile-image {
+        border-radius: 15px;
+    }
+    
+    .about-image-overlay {
+        border-radius: 15px;
+    }
+}
+
+/* Small Mobile (400px and below) */
+@media (max-width: 400px) {
+    .gray-section {
+        padding: 1.5rem 0.6rem;
+    }
+    
+    .about-content {
+        gap: 1.5rem;
+    }
+    
+    .about-image {
+        width: 200px;
+        height: 240px;
+    }
+    
+    .about-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.7rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.2px;
+    }
+    
+    .about-description {
+        font-size: 0.8rem;
+        line-height: 1.3;
+    }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+    .gray-section {
+        padding: 1.2rem 0.5rem;
+    }
+    
+    .about-content {
+        gap: 1.2rem;
+    }
+    
+    .about-image {
+        width: 180px;
+        height: 220px;
+    }
+    
+    .about-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .about-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.1px;
+    }
+    
+    .about-description {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+    
+    .about-profile-image {
+        border-radius: 12px;
+    }
+    
+    .about-image-overlay {
+        border-radius: 12px;
+    }
+}
+
+/* Mobile Landscape Orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    .gray-section {
+        padding: 1.5rem 1rem;
+        min-height: 500px;
+    }
+    
+    .about-content {
+        flex-direction: row;
+        text-align: left;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .about-text {
+        order: 1;
+        flex: 1;
+    }
+    
+    .about-image {
+        order: 2;
+        flex: 0 0 200px;
+        width: 200px;
+        height: 240px;
+    }
+    
+    .about-title {
+        font-size: 1.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .about-description {
+        font-size: 0.85rem;
+        line-height: 1.3;
+        max-width: 100%;
+    }
+}
+
+/* Disable hover effects on touch devices */
+@media (max-width: 768px) {
+    .about-profile-image:hover {
+        transform: none;
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+    
+    .about-profile-image:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* High DPI/Retina optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .about-title,
+    .about-subtitle,
+    .about-description {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Accessibility - Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .about-text,
+    .about-image {
+        transform: none;
+        opacity: 1;
+        animation: none;
+    }
+    
+    .about-profile-image {
+        transition: none;
+    }
+    
+    .about-profile-image:hover {
+        transform: none;
     }
 }
