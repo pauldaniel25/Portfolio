@@ -39,6 +39,7 @@
 .hero-content-center {
     text-align: center;
     max-width: 800px;
+    width: 100%;
     transform: translateY(50px);
     opacity: 0;
     animation: slideInUp 1s ease-out 0.3s forwards;
@@ -55,6 +56,7 @@
     line-height: 1.2;
     font-family: 'WDXL Lubrifont JP N', sans-serif;
     letter-spacing: 3px;
+    word-break: break-word; /* Prevent text overflow */
 }
 
 .hero-description {
@@ -63,6 +65,7 @@
     color: #d1d1d1;
     margin: 0 auto 3rem auto;
     max-width: 600px;
+    padding: 0 1rem; /* Add horizontal padding */
 }
 
 /* Scroll Arrow */
@@ -115,40 +118,192 @@
     }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Enhanced Responsive Design */
+
+/* Large Tablets and Small Desktops (1024px and below) */
+@media (max-width: 1024px) {
     .hero-container {
-        padding: 1rem;
+        padding: 2rem 1.5rem;
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         letter-spacing: 2px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+        max-width: 550px;
+    }
+    
+    .arrow-down {
+        font-size: 2.3rem;
+    }
+}
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+    .hero-container {
+        padding: 1.5rem 1rem;
+        height: 100vh;
+        min-height: 600px; /* Ensure minimum height */
+    }
+    
+    .hero-content-center {
+        max-width: 90%;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
     }
     
     .hero-description {
         font-size: 1rem;
         line-height: 1.6;
         margin-bottom: 2rem;
+        padding: 0 0.5rem;
+        max-width: 500px;
     }
     
     .arrow-down {
         font-size: 2rem;
     }
+    
+    /* Adjust video overlay for better readability on tablets */
+    .video-overlay {
+        background: rgba(0, 0, 0, 0.5);
+    }
 }
 
-@media (max-width: 480px) {
+/* Mobile Landscape (667px and below) */
+@media (max-width: 667px) and (orientation: landscape) {
+    .hero-container {
+        padding: 1rem;
+        min-height: 500px;
+    }
+    
     .hero-title {
-        font-size: 2rem;
-        letter-spacing: 1px;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
     }
     
     .hero-description {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         margin-bottom: 1.5rem;
+        line-height: 1.5;
     }
     
     .arrow-down {
         font-size: 1.8rem;
+    }
+}
+
+/* Mobile Portrait (480px and below) */
+@media (max-width: 480px) {
+    .hero-container {
+        padding: 1rem 0.75rem;
+        min-height: 100vh;
+        justify-content: center;
+    }
+    
+    .hero-content-center {
+        max-width: 95%;
+        padding: 0 0.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        letter-spacing: 1px;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        word-spacing: 0.1em;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+        padding: 0;
+        line-height: 1.5;
+        max-width: 100%;
+    }
+    
+    .arrow-down {
+        font-size: 1.8rem;
+    }
+    
+    /* Enhanced overlay for better text readability on small screens */
+    .video-overlay {
+        background: rgba(0, 0, 0, 0.6);
+    }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+    .hero-container {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .hero-title {
+        font-size: 1.7rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+    
+    .hero-description {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.4;
+    }
+    
+    .arrow-down {
+        font-size: 1.6rem;
+    }
+    
+    .video-overlay {
+        background: rgba(0, 0, 0, 0.65);
+    }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-container {
+        padding: 0.5rem;
+        min-height: auto;
+        height: 100vh;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .hero-description {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+    }
+    
+    .arrow-down {
+        font-size: 1.5rem;
+    }
+}
+
+/* High DPI/Retina Display adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-title {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .hero-description {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 }
