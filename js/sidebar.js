@@ -54,31 +54,51 @@ class SidebarManager {
 
     setupNavigationItems() {
         this.navItems.forEach((navItem, index) => {
-            navItem.addEventListener('click', (e) => {
+            // Handle both click and touch events
+            const handleNavigation = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
                 const sectionIndex = parseInt(navItem.getAttribute('data-section'));
-                console.log(`Navigating to section ${sectionIndex}`); // Debug log
+                console.log(`Navigating to section ${sectionIndex}`);
                 
                 this.navigateToSection(sectionIndex);
                 
-                // Optional: Close sidebar after navigation on mobile
-                if (window.innerWidth <= 768) {
-                    setTimeout(() => {
-                        this.closeSidebar();
-                    }, 300);
+            };
+
+            // Add click event for all devices
+            navItem.addEventListener('click', handleNavigation);
+
+            // Touch events for mobile devices
+            navItem.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                // Add visual feedback
+                navItem.style.transform = 'scale(1.1)';
+            }, { passive: false });
+
+            navItem.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                // Reset transform and then handle navigation
+                setTimeout(() => {
+                    navItem.style.transform = navItem.classList.contains('active') ? 'scale(1.05)' : 'scale(1)';
+                }, 100);
+                handleNavigation(e);
+            }, { passive: false });
+
+            // Mouse hover effects (desktop only)
+            navItem.addEventListener('mouseenter', () => {
+                if (!('ontouchstart' in window)) { // Only on non-touch devices
+                    if (!navItem.classList.contains('active')) {
+                        navItem.style.transform = 'scale(1.1)';
+                    }
                 }
             });
 
-            // Add hover effects
-            navItem.addEventListener('mouseenter', () => {
-                navItem.style.transform = 'scale(1.1)';
-            });
-
             navItem.addEventListener('mouseleave', () => {
-                if (!navItem.classList.contains('active')) {
-                    navItem.style.transform = 'scale(1)';
+                if (!('ontouchstart' in window)) { // Only on non-touch devices
+                    if (!navItem.classList.contains('active')) {
+                        navItem.style.transform = 'scale(1)';
+                    }
                 }
             });
         });
@@ -125,6 +145,9 @@ class SidebarManager {
                     if (sectionIndex !== -1 && sectionIndex !== this.currentSection) {
                         this.currentSection = sectionIndex;
                         this.updateActiveNavItem();
+                        
+                        // Trigger section animations when scrolling normally
+                        this.triggerSectionAnimations(entry.target, sectionIndex);
                     }
                 }
             });
@@ -154,14 +177,23 @@ class SidebarManager {
         }
         
         if (targetSection.classList.contains('skills-section')) {
-            // Animate skill items
+            // Animate skill categories first
             setTimeout(() => {
+                const skillCategories = targetSection.querySelectorAll('.skill-category');
+                skillCategories.forEach((category, index) => {
+                    setTimeout(() => {
+                        category.style.transform = 'translateY(0)';
+                        category.style.opacity = '1';
+                    }, index * 200);
+                });
+                
+                // Then animate individual skill items
                 const skillItems = targetSection.querySelectorAll('.skill-item');
                 skillItems.forEach((item, index) => {
                     setTimeout(() => {
                         item.style.transform = 'translateY(0)';
                         item.style.opacity = '1';
-                    }, index * 100);
+                    }, 400 + (index * 100));
                 });
             }, 300);
         }

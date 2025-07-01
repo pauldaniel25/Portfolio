@@ -7,6 +7,11 @@ class Navigation {
         this.currentSection = 0;
         this.blackSectionAnimated = false;
         this.skillsSectionAnimated = false;
+        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        this.touchStartY = 0;
+        this.touchMoveY = 0;
+        this.touchVelocity = 0;
+        this.lastTouchTime = 0;
         this.init();
     }
 
@@ -17,19 +22,55 @@ class Navigation {
         this.setupTouchNavigation();
         this.setupIntersectionObserver();
         this.updateSectionVisibility();
+        this.handleResize();
+        this.optimizeForMobile();
+    }
+
+    optimizeForMobile() {
+        if (this.isMobile) {
+            // Disable default touch behaviors that might interfere
+            document.body.style.touchAction = 'pan-y';
+            this.scrollContainer.style.touchAction = 'pan-y';
+            
+            // Prevent iOS bounce and zoom
+            document.addEventListener('touchmove', (e) => {
+                if (e.scale !== 1) { e.preventDefault(); }
+            }, { passive: false });
+            
+            // Optimize for 60fps on mobile
+            this.scrollContainer.style.willChange = 'scroll-position';
+            this.sections.forEach(section => {
+                section.style.willChange = 'transform';
+            });
+        }
+    }
+
+    handleResize() {
+        window.addEventListener('resize', () => {
+            this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        });
     }
 
     scrollToSection(index) {
         if (index >= 0 && index < this.sections.length) {
             const targetSection = this.sections[index];
-            targetSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            
+            if (this.isMobile) {
+                // For mobile: Use smooth native scrolling with CSS scroll-snap
+                this.scrollContainer.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            } else {
+                // For desktop: Use scrollIntoView
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            
             this.currentSection = index;
             this.updateSectionVisibility();
-            
-            // Fixed: Call the correct method name
             this.triggerSectionAnimations(targetSection, index);
         }
     }
@@ -50,32 +91,34 @@ class Navigation {
     }
 
     setupWheelNavigation() {
-        this.scrollContainer.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            
-            if (this.isScrolling) return;
-            
-            this.isScrolling = true;
-            
-            if (e.deltaY > 0) {
-                // Scrolling down
-                if (this.currentSection < this.sections.length - 1) {
-                    this.currentSection++;
-                    this.scrollToSection(this.currentSection);
+        // Desktop wheel navigation
+        if (!this.isMobile) {
+            this.scrollContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                
+                if (this.isScrolling) return;
+                
+                this.isScrolling = true;
+                
+                if (e.deltaY > 0) {
+                    // Scrolling down
+                    if (this.currentSection < this.sections.length - 1) {
+                        this.currentSection++;
+                        this.scrollToSection(this.currentSection);
+                    }
+                } else {
+                    // Scrolling up
+                    if (this.currentSection > 0) {
+                        this.currentSection--;
+                        this.scrollToSection(this.currentSection);
+                    }
                 }
-            } else {
-                // Scrolling up
-                if (this.currentSection > 0) {
-                    this.currentSection--;
-                    this.scrollToSection(this.currentSection);
-                }
-            }
-            
-            // Reset scrolling flag after animation
-            setTimeout(() => {
-                this.isScrolling = false;
-            }, 800);
-        });
+                
+                setTimeout(() => {
+                    this.isScrolling = false;
+                }, 800);
+            });
+        }
     }
 
     setupKeyboardNavigation() {
@@ -113,37 +156,104 @@ class Navigation {
     }
 
     setupTouchNavigation() {
-        let touchStartY = 0;
-        let touchEndY = 0;
-
+        let isScrollingProgrammatically = false;
+        let touchHistory = [];
+        
+        // Touch start
         this.scrollContainer.addEventListener('touchstart', (e) => {
-            touchStartY = e.changedTouches[0].screenY;
-        });
+            this.touchStartY = e.touches[0].clientY;
+            this.touchMoveY = this.touchStartY;
+            this.lastTouchTime = Date.now();
+            this.touchVelocity = 0;
+            touchHistory = [];
+            
+            // Record initial touch
+            touchHistory.push({
+                y: this.touchStartY,
+                time: this.lastTouchTime
+            });
+            
+        }, { passive: true });
 
+        // Touch move - track velocity like Arknights
+        this.scrollContainer.addEventListener('touchmove', (e) => {
+            const currentY = e.touches[0].clientY;
+            const currentTime = Date.now();
+            
+            // Track touch history for velocity calculation
+            touchHistory.push({
+                y: currentY,
+                time: currentTime
+            });
+            
+            // Keep only recent touches (last 100ms)
+            touchHistory = touchHistory.filter(touch => currentTime - touch.time < 100);
+            
+            // Calculate velocity
+            if (touchHistory.length >= 2) {
+                const recent = touchHistory[touchHistory.length - 1];
+                const previous = touchHistory[0];
+                const timeDiff = recent.time - previous.time;
+                const distanceDiff = recent.y - previous.y;
+                this.touchVelocity = timeDiff > 0 ? distanceDiff / timeDiff : 0;
+            }
+            
+            this.touchMoveY = currentY;
+            
+        }, { passive: true });
+
+        // Touch end - Arknights-style smooth section snapping
         this.scrollContainer.addEventListener('touchend', (e) => {
-            if (this.isScrolling) return;
+            if (this.isScrolling || isScrollingProgrammatically) return;
             
-            touchEndY = e.changedTouches[0].screenY;
-            const swipeDistance = touchStartY - touchEndY;
+            const swipeDistance = this.touchStartY - this.touchMoveY;
+            const swipeTime = Date.now() - this.lastTouchTime;
+            const absVelocity = Math.abs(this.touchVelocity);
             
-            if (Math.abs(swipeDistance) > 50) {
+            // Arknights-inspired thresholds
+            const minDistance = 30;
+            const minVelocity = 0.3;
+            const maxTime = 500;
+            
+            // Determine if we should navigate
+            const shouldNavigate = (
+                Math.abs(swipeDistance) > minDistance || 
+                absVelocity > minVelocity
+            ) && swipeTime < maxTime;
+            
+            if (shouldNavigate && !this.isScrolling) {
                 this.isScrolling = true;
+                isScrollingProgrammatically = true;
                 
-                if (swipeDistance > 0 && this.currentSection < this.sections.length - 1) {
+                // Determine direction based on distance and velocity
+                const isUpSwipe = swipeDistance > 0 || this.touchVelocity < -minVelocity;
+                const isDownSwipe = swipeDistance < 0 || this.touchVelocity > minVelocity;
+                
+                if (isUpSwipe && this.currentSection < this.sections.length - 1) {
                     // Swipe up - go to next section
                     this.currentSection++;
                     this.scrollToSection(this.currentSection);
-                } else if (swipeDistance < 0 && this.currentSection > 0) {
+                } else if (isDownSwipe && this.currentSection > 0) {
                     // Swipe down - go to previous section
                     this.currentSection--;
                     this.scrollToSection(this.currentSection);
                 }
                 
+                // Reset flags after smooth scroll completes
                 setTimeout(() => {
                     this.isScrolling = false;
-                }, 800);
+                    isScrollingProgrammatically = false;
+                }, 600);
             }
-        });
+            
+        }, { passive: true });
+
+        // Prevent default scroll behavior during programmatic scrolling
+        this.scrollContainer.addEventListener('scroll', (e) => {
+            if (isScrollingProgrammatically) {
+                return;
+            }
+        }, { passive: true });
     }
 
     setupIntersectionObserver() {
@@ -151,11 +261,10 @@ class Navigation {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const sectionIndex = Array.from(this.sections).indexOf(entry.target);
-                    if (sectionIndex !== -1) {
+                    if (sectionIndex !== -1 && sectionIndex !== this.currentSection) {
                         this.currentSection = sectionIndex;
                         this.updateSectionVisibility();
                         
-                        // Fixed: Call the correct method name and add debug logging
                         console.log(`Section ${sectionIndex} is now visible`);
                         this.triggerSectionAnimations(entry.target, sectionIndex);
                         
@@ -168,13 +277,13 @@ class Navigation {
                 }
             });
         }, {
-            threshold: 0.5
+            threshold: this.isMobile ? 0.6 : 0.5,
+            rootMargin: this.isMobile ? '-20% 0px -20% 0px' : '-10% 0px -10% 0px'
         });
 
         // Observe all sections
         this.sections.forEach(section => {
             observer.observe(section);
-            section.style.transition = 'opacity 0.6s ease-in-out';
         });
     }
 
@@ -193,7 +302,6 @@ class Navigation {
         });
     }
     
-    // Fixed: Corrected method name and improved logic
     triggerSectionAnimations(targetSection, sectionIndex) {
         console.log(`Triggering animations for section: ${targetSection.className}`);
         
