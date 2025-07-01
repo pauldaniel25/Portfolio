@@ -2,6 +2,52 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Add these properties to remove tap highlights */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.hero-title,
+.hero-description,
+.about-description,
+.project-description-inline,
+.contact-value {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Specifically target interactive elements */
+button,
+a,
+.nav-item,
+.card,
+.scroll-arrow,
+.nav-toggle,
+.social-link,
+.contact-item {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    outline: none;
+}
+/* Custom focus states for accessibility */
+button:focus,
+a:focus,
+.nav-item:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+/* Remove focus outline for mouse users */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+.nav-item:focus:not(:focus-visible) {
+    outline: none;
 }
 
 html, body {
