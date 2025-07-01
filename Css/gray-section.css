@@ -248,8 +248,9 @@
     }
     
     .about-image {
-        width: 220px;
-        height: 260px;
+        padding: 10px 10px 0px 10px;
+        width: 200px;
+        height: 240px;
     }
     
     .about-title {
