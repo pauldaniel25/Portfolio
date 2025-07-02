@@ -286,7 +286,6 @@
     }
     
     .contact-content {
-        grid-template-columns: 1fr;
         gap: 2rem;
     }
     
@@ -319,6 +318,10 @@
     }
 }
 @media (max-width: 480px) {
+        .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
     .contact-main-title {
         font-size: 2rem;
         letter-spacing: 1px;
