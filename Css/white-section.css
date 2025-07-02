@@ -250,7 +250,7 @@
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
         letter-spacing: 0.5px;
         margin-bottom: 1rem;
         line-height: 1.2;
@@ -263,7 +263,7 @@
     }
     
     .arrow-down {
-        font-size: 2.3rem;
+        font-size: 2rem;
     }
     
     .video-overlay {
