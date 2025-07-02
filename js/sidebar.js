@@ -15,9 +15,11 @@ class SidebarManager {
             this.setupOutsideClick();
             this.setupEscapeKey();
             this.setupNavigationItems();
-            this.setupSectionObserver();
             this.updateActiveNavItem();
         }
+        
+        // Make this instance globally accessible
+        window.sidebarManager = this;
     }
 
     setupToggleButton() {
@@ -54,40 +56,43 @@ class SidebarManager {
 
     setupNavigationItems() {
         this.navItems.forEach((navItem, index) => {
-            // Handle both click and touch events
             const handleNavigation = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
                 const sectionIndex = parseInt(navItem.getAttribute('data-section'));
-                console.log(`Navigating to section ${sectionIndex}`);
                 
-                this.navigateToSection(sectionIndex);
+                // Update current section immediately
+                this.currentSection = sectionIndex;
+                this.updateActiveNavItem();
+                
+                // Navigate via the navigation system with sidebar flag
+                if (window.navigation) {
+                    window.navigation.goToSection(sectionIndex, true);
+                } else {
+                    // Fallback if navigation isn't ready
+                    this.navigateToSection(sectionIndex);
+                }
                 
             };
 
-            // Add click event for all devices
             navItem.addEventListener('click', handleNavigation);
 
-            // Touch events for mobile devices
             navItem.addEventListener('touchstart', (e) => {
                 e.preventDefault();
-                // Add visual feedback
                 navItem.style.transform = 'scale(1.1)';
             }, { passive: false });
 
             navItem.addEventListener('touchend', (e) => {
                 e.preventDefault();
-                // Reset transform and then handle navigation
                 setTimeout(() => {
                     navItem.style.transform = navItem.classList.contains('active') ? 'scale(1.05)' : 'scale(1)';
                 }, 100);
                 handleNavigation(e);
             }, { passive: false });
 
-            // Mouse hover effects (desktop only)
             navItem.addEventListener('mouseenter', () => {
-                if (!('ontouchstart' in window)) { // Only on non-touch devices
+                if (!('ontouchstart' in window)) {
                     if (!navItem.classList.contains('active')) {
                         navItem.style.transform = 'scale(1.1)';
                     }
@@ -95,7 +100,7 @@ class SidebarManager {
             });
 
             navItem.addEventListener('mouseleave', () => {
-                if (!('ontouchstart' in window)) { // Only on non-touch devices
+                if (!('ontouchstart' in window)) {
                     if (!navItem.classList.contains('active')) {
                         navItem.style.transform = 'scale(1)';
                     }
@@ -108,7 +113,6 @@ class SidebarManager {
         if (sectionIndex >= 0 && sectionIndex < this.sections.length) {
             const targetSection = this.sections[sectionIndex];
             
-            // Smooth scroll to section
             targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -116,115 +120,46 @@ class SidebarManager {
             
             this.currentSection = sectionIndex;
             this.updateActiveNavItem();
-            
-            // Trigger any section-specific animations
-            this.triggerSectionAnimations(targetSection, sectionIndex);
         }
     }
 
     updateActiveNavItem() {
-        // Remove active class from all nav items
         this.navItems.forEach(item => {
             item.classList.remove('active');
             item.style.transform = 'scale(1)';
         });
         
-        // Add active class to current nav item
         if (this.navItems[this.currentSection]) {
             this.navItems[this.currentSection].classList.add('active');
             this.navItems[this.currentSection].style.transform = 'scale(1.05)';
         }
     }
 
-    setupSectionObserver() {
-        // Intersection Observer to track which section is in view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const sectionIndex = Array.from(this.sections).indexOf(entry.target);
-                    if (sectionIndex !== -1 && sectionIndex !== this.currentSection) {
-                        this.currentSection = sectionIndex;
-                        this.updateActiveNavItem();
-                        
-                        // Trigger section animations when scrolling normally
-                        this.triggerSectionAnimations(entry.target, sectionIndex);
-                    }
-                }
-            });
-        }, {
-            threshold: 0.5,
-            rootMargin: '-50px 0px -50px 0px'
-        });
-
-        // Observe all sections
-        this.sections.forEach(section => {
-            observer.observe(section);
-        });
-    }
-
-    triggerSectionAnimations(targetSection, sectionIndex) {
-        // Trigger animations for specific sections
-        if (targetSection.classList.contains('black-section')) {
-            // Animate cards in the works section
-            setTimeout(() => {
-                const cards = targetSection.querySelectorAll('.card');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('animate');
-                    }, index * 200);
-                });
-            }, 300);
-        }
-        
-        if (targetSection.classList.contains('skills-section')) {
-            // Animate skill categories first
-            setTimeout(() => {
-                const skillCategories = targetSection.querySelectorAll('.skill-category');
-                skillCategories.forEach((category, index) => {
-                    setTimeout(() => {
-                        category.style.transform = 'translateY(0)';
-                        category.style.opacity = '1';
-                    }, index * 200);
-                });
-                
-                // Then animate individual skill items
-                const skillItems = targetSection.querySelectorAll('.skill-item');
-                skillItems.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.style.transform = 'translateY(0)';
-                        item.style.opacity = '1';
-                    }, 400 + (index * 100));
-                });
-            }, 300);
-        }
-        
-        if (targetSection.classList.contains('contact-section')) {
-            // Animate contact items
-            setTimeout(() => {
-                const contactItems = targetSection.querySelectorAll('.contact-item, .social-link');
-                contactItems.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.style.transform = 'translateY(0)';
-                        item.style.opacity = '1';
-                    }, index * 150);
-                });
-            }, 300);
+    // Method to be called from navigation.js to update current section
+    updateCurrentSection(sectionIndex) {
+        if (sectionIndex !== this.currentSection) {
+            this.currentSection = sectionIndex;
+            this.updateActiveNavItem();
         }
     }
 
-    // Public method to get current section (for other modules)
     getCurrentSection() {
         return this.currentSection;
     }
 
-    // Public method to navigate to section (for other modules)
     goToSection(index) {
-        this.navigateToSection(index);
+        this.currentSection = index;
+        this.updateActiveNavItem();
+        
+        if (window.navigation) {
+            window.navigation.goToSection(index, true);
+        } else {
+            this.navigateToSection(index);
+        }
     }
 }
 
 // Initialize sidebar when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Make SidebarManager globally accessible
-    window.sidebarManager = new SidebarManager();
+    new SidebarManager();
 });
