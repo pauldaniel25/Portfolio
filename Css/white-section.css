@@ -250,14 +250,14 @@
     }
     
     .hero-title {
-        font-size: 1.7rem;
+        font-size: 2rem;
         letter-spacing: 0.5px;
         margin-bottom: 1rem;
         line-height: 1.2;
     }
     
     .hero-description {
-        font-size: 0.85rem;
+        font-size: 1rem;
         margin-bottom: 1.5rem;
         line-height: 1.4;
     }
