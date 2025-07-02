@@ -118,3 +118,134 @@
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateX(-50%) scale(1.1);
 }
+
+/* Animations */
+@keyframes slideInLeft {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    to {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .project-details-container {
+        overflow-y: auto;
+        align-items: flex-start;
+        padding-top: 3rem;
+    }
+    
+    .project-detail-inline {
+        padding: 1rem;
+        height: auto;
+        min-height: 100%;
+        transform: translateY(20px);
+    }
+    
+    .project-detail-inline.active {
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    
+    .project-content-inline {
+        flex-direction: column;
+        gap: 1.5rem;
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .project-info-inline {
+        padding: 0;
+        gap: 1rem;
+        height: auto;
+        justify-content: flex-start;
+        text-align: center;
+    }
+    
+    .project-title-inline {
+        font-size: 1.8rem;
+        margin-bottom: 0;
+        transform: translateY(-30px);
+        animation: slideInUp 0.8s ease forwards 0.4s;
+    }
+    
+    .project-description-inline {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        transform: translateY(-30px);
+        animation: slideInUp 0.8s ease forwards 0.6s;
+        margin-bottom: 0.8rem;
+    }
+    
+    .close-project-btn {
+        top: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 768px) and (min-width: 481px) {
+    .project-details-container {
+        overflow-y: auto;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+    
+    .project-detail-inline {
+        padding: 2rem;
+        height: auto;
+        min-height: 100%;
+    }
+    
+    .project-content-inline {
+        flex-direction: column;
+        gap: 1rem;
+        height: auto;
+        padding: 1rem 0;
+    }
+    
+    .project-info-inline {
+        padding: 0 1rem;
+        text-align: center;
+        gap: 1.5rem;
+        height: auto;
+        justify-content: flex-start;
+    }
+    
+    .project-title-inline {
+        font-size: 2.5rem;
+        transform: translateY(-30px);
+        animation: slideInUp 0.8s ease forwards 0.4s;
+    }
+    
+    .project-description-inline {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        transform: translateY(-30px);
+        animation: slideInUp 0.8s ease forwards 0.6s;
+    }
+    
+    .close-project-btn {
+        top: 1.5rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+}

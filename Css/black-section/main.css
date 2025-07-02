@@ -78,3 +78,9 @@
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
 }
+
+@media (max-width: 480px) {
+.section-title{
+    font-size: 2rem;
+}
+}
