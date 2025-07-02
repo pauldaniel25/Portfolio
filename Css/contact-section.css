@@ -318,40 +318,74 @@
         padding: 1rem;
     }
 }
-
 @media (max-width: 480px) {
     .contact-main-title {
         font-size: 2rem;
         letter-spacing: 1px;
+        margin: 0;
+    }
+    .contact-info-header{
+
+        margin-bottom: 0.5rem;
     }
     
     .contact-info,
     .social-links {
-        padding: 1.5rem;
-    }
-    
-    .contact-info-title,
-    .social-title {
-        font-size: 1.3rem;
-    }
-    
-    .contact-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.8rem;
         padding: 1rem;
     }
     
+    .contact-info-title{
+           font-size: 1.1rem;
+    }
+    .social-title {
+          font-size: 1.1rem;
+          margin-bottom: 0.5rem;
+    }
+    
+     .contact-item {
+        flex-direction: row;
+        text-align: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        width: 14rem;
+        height: 2.5rem;
+    }
+    .contact-icon {
+        width: 25px;
+        height: 25px;
+    }
+    .contact-label {
+    font-size: 0.7rem;
+    width: fit-content;
+    }
+    .contact-value {
+    font-size: 0.7rem;
+    width: fit-content;
+    color: #b0b0b0;
+    margin: 0;
+}
+    
     .contact-details {
         text-align: center;
+        width: 80%;
     }
     
     .social-link {
-        padding: 0.8rem;
-        gap: 1rem;
+        flex-direction: row;
+        text-align: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        width: 14rem;
+        height: 2.5rem;
+    }
+    
+    .social-icon {
+        width: 25px;
+        height: 25px;
     }
     
     .social-text {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        width: fit-content;
     }
 }
